@@ -22,11 +22,13 @@ class GrailsPlugin implements Plugin<Project> {
       String grailsFolder = makeGrailsPath(project.grails.version)
       String extension = SystemUtils.IS_OS_WINDOWS ? '.bat' : ''
       String plainOutput = project.grails.version.startsWith('1.3.') ? '' : '-plain-output'
+      String nonInteractive = '--non-interactive'
       List<String> args = collectArguments(project)
       List<String> systemProperties = collectSystemProperties(project)
       List<String> command = [
         Path.join(grailsFolder, 'bin', "grails${extension}"),
-        plainOutput
+        plainOutput,
+        nonInteractive
       ]
       command.addAll(systemProperties.collect { "-D${it}" })
       command.add(target)
@@ -98,6 +100,7 @@ class GrailsPlugin implements Plugin<Project> {
       'doc',
       'generate-all',
       'generate-controller',
+      'generate-pom',
       'generate-views',
       'help',
       'init',
@@ -109,8 +112,11 @@ class GrailsPlugin implements Plugin<Project> {
       'list-plugin-updates',
       'list-plugins',
       'migrate-docs',
+      'maven-install',
+      'maven-deploy',
       'package',
       'package-plugin',
+      'publish-plugin',
       'plugin-info',
       'refresh-dependencies',
       'remove-proxy',
@@ -133,7 +139,8 @@ class GrailsPlugin implements Plugin<Project> {
     String grailsFolder = makeGrailsPath(project.grails.version)
     String extension = SystemUtils.IS_OS_WINDOWS ? '.bat' : ''
     String plainOutput = project.grails.version.startsWith('1.3.') ? '' : '-plain-output'
-    Process process = "${Path.join(grailsFolder, 'bin', 'grails' + extension)} ${plainOutput} ${target}".execute()
+    String nonInteractive = '-non-interactive'
+    Process process = "${Path.join(grailsFolder, 'bin', 'grails' + extension)} ${plainOutput} ${nonInteractive} ${target}".execute()
     String s = null
     StringBuilder output = new StringBuilder()
     BufferedReader input = new BufferedReader(new InputStreamReader(process.inputStream))

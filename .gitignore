@@ -6,3 +6,16 @@ bin
 build
 src/integrationTest/project/stacktrace.log
 src/integrationTest/project/target/*
+.idea/.name
+.idea/compiler.xml
+.idea/copyright/profiles_settings.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scopes/scope_settings.xml
+.idea/uiDesigner.xml
+.idea/vcs.xml
+.idea/workspace.xml
+src/integrationTest/project/Project.iml
+src/main/Main.iml
+src/test/Test.iml
